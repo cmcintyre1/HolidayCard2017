@@ -17,9 +17,9 @@ void setup() {
   size(2000, 1000);
   wreath = loadImage("ClaytonsHolidayCard/data/goodWreath.png");
   wreath.resize(100,100);
-  fondo = loadImage("bg.jpg");
+  fondo = loadImage("ClaytonsHolidayCard/data/bg.jpg");
   fondo.resize(2000, 1000);
-  elfPic = loadImage("finalElf.png");
+  elfPic = loadImage("ClaytonsHolidayCard/data/finalElf.png");
   stringWords = createFont("Calibri Italic", 50, true);
 
   for (int i = 0; i<500; i ++) {
