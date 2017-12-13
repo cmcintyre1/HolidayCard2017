@@ -15,11 +15,11 @@ boolean red, green;
 
 void setup() {
   size(2000, 1000);
-  wreath = loadImage("data/goodWreath.png");
+  wreath = loadImage("goodWreath.png");
   wreath.resize(100,100);
-  fondo = loadImage("data/bg.jpg");
+  fondo = loadImage("bg.jpg");
   fondo.resize(2000, 1000);
-  elfPic = loadImage("data/finalElf.png");
+  elfPic = loadImage("finalElf.png");
   stringWords = createFont("Calibri Italic", 50, true);
 
   for (int i = 0; i<500; i ++) {
@@ -36,7 +36,14 @@ void draw() {
 
   message();
   globeGlass();
-  elf();
+   elfPic.resize(300, 550);
+  image(elfPic, elfLocation.x, elfLocation.y);
+
+  if (clicking) {
+    elfLocation.add(elfShiver);
+
+    elfShiver.mult(-1);
+  }
   makeSnow();
   globeBase();
   lights();
