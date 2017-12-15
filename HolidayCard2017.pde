@@ -1,4 +1,4 @@
-boolean clicking = true;
+boolean clicking = false;
 int numClicks = 0;
 boolean shouldSink = false;
 boolean hasSunk = false;
@@ -15,11 +15,11 @@ boolean red, green;
 
 void setup() {
   size(2000, 1000);
-  wreath = loadImage("data/goodWreath.png");
+  wreath = loadImage("goodWreath.png");
   wreath.resize(100,100);
-  fondo = loadImage("data/bg.jpg");
+  fondo = loadImage("bg.jpg");
   fondo.resize(2000, 1000);
-  elfPic = loadImage("data/finalElf.png");
+  elfPic = loadImage("finalElf.png");
   stringWords = createFont("Calibri Italic", 50, true);
 
   for (int i = 0; i<500; i ++) {
@@ -36,28 +36,11 @@ void draw() {
 
   message();
   globeGlass();
-   elfPic.resize(300, 550);
-  image(elfPic, elfLocation.x, elfLocation.y);
-
-  if (clicking) {
-    elfLocation.add(elfShiver);
-
-    elfShiver.mult(-1);
-  }
+  elf();
   makeSnow();
-   fill(70, 36, 1);
-  rect(0, 900, 2000, 200);
-  fill(90, 55, 9);
-  noStroke();
-  ellipse(1000, 800, 600, 50);
-  rect(725, 800, 550, 100);
-  ellipse(1000, 900, 650, 100);
-  
-  image(wreath,730,800);
-  image(wreath,1170,800);
-  
+  globeBase();
   lights();
-  //clickHere();
+  clickHere();
   sign();
 }
 
@@ -237,75 +220,4 @@ void sign(){
   textFont(stringWords,20);
   fill(0);
   text("Clayton McIntyre ACS",1700,980);
-}
-
-
-class Snow {
-
-  float xPos, yPos, xSize, ySize;
-  float xDir = random(-15, 15);
-  float yDir = random(-15, -5);
-  float col = 255;
-
-  PVector location;
-  PVector velocity;
-  PVector acceleration;
-
-  public Snow() {
-  }
-
-
-  public Snow(float xPosition, float yPosition, float xWidth, float yWidth) {
-
-    xSize = xWidth;
-    ySize = yWidth;
-
-
-    location = new PVector(xPosition, yPosition);
-    velocity = new PVector(xDir, yDir);
-
-    acceleration = new PVector(0, random(.01, .5));
-  }
-
-  public float getXPos() {
-    return location.x;
-  }
-
-  public float getYPos() {
-    return location.y;
-  }
-
-  public void display() {
-    fill(col); 
-
-    ellipse(location.x, location.y, xSize, ySize);
-  }
-
-  public void move() {
-    location.add(velocity);
-  }
-
-  public void turnAround() {
-    velocity.mult(-1);
-  }
-
-  public void relaunch() {
-    velocity.x = xDir;
-    velocity.y = yDir;
-  }
-
-  public void sink() {
-    if (location.y<780) {
-      velocity.y += acceleration.y;
-    } else {
-      velocity.mult(0);
-      location.x = random(740, 1260);
-      location.y = 780;
-    }
-    if (location.x<730 && velocity.x<0) {
-      velocity.x += random(1, 2);
-    } else if (location.x>1270 && velocity.x>0) {
-      velocity.x += random(-2, -1);
-    }
-  }
 }
